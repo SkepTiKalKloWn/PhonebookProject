@@ -1,7 +1,6 @@
 
 public class PhonebookHash<String key, Entry e> 
 {
-	private final Entry[] bag = new Entry [13];
 	private int numberOfEntries;
    /** Adds a new entry to this dictionary. If the given search
        key already exists in the dictionary, replaces the
@@ -11,19 +10,20 @@ public class PhonebookHash<String key, Entry e>
        @return either null if the new entry was added to the dictionary
                or the value that was associated with key if that value
                was replaced */
-   public Entry add(String key, Entry e);
-   int index = 
+   public Entry add(String firstName, String lastName, String emailAddress, String phoneNumber);
+   Entry newEntry = new Entry(firstName,lastName,emailAddress,phoneNumber);
+   String searchKey = Entry.getKey();
    /** Removes a specific entry from this dictionary.
         @param key an object search key of the entry to be removed
         @return either the value that was associated with the search key
         or null if no such object exists */
-   public V remove(K key);
+   public Entry remove(String firstName, String lastName);
    /** Retrieves from this dictionary the value associated with a given
        search key.
        @param key an object search key of the entry to be retrieved
        @return either the value that is associated with the search key
        or null if no such object exists */
-   public V getValue(K key);
+   public Entry lookupEntry(String firstName, String lastName);
    /** Sees whether a specific entry is in this dictionary.
         @param key an object search key of the desired entry
         @return true if key is associated with an entry in the
@@ -47,4 +47,16 @@ public class PhonebookHash<String key, Entry e>
    public int getSize();
    /** Removes all entries from this dictionary. */
    public void clear();
+}
+private class Node
+{
+	private Entry data;
+	private Node next;
+	private Node(Entry dataPortion){
+		this(dataPortion, null);
+	}
+	private Node(Entry dataPortion,Node nextNode){
+		data = dataPortion;
+		next = nextNode;
+	}
 }
